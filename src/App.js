@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import "./App.css";
 import instagramText from "./assets/images/insta-text.png";
 import Post from "./components/Post";
 

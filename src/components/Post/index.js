@@ -1,6 +1,8 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import testPic from "../assets/images/insta-pic1.jpg";
+import testPic from "assets/images/insta-pic1.jpg";
+import ActionMenu from "./components/ActionMenu";
+import PostHeader from "./components/PostHeader";
 
 const PostContainer = styled.div`
   width: 400px;
@@ -18,7 +20,7 @@ const ImageContainer = styled.div`
   justify-content: center;
 
   > img {
-    width:100%;
+    width: 100%;
     object-fit: contain;
   }
 `;
@@ -30,19 +32,20 @@ const ActionContainer = styled.div`
 function Post() {
   return (
     <PostContainer>
+      <PostHeader />
       <ImageContainer>
-        <img src={testPic} alt="insta pic"/>
+        <img src={testPic} alt="insta pic" />
       </ImageContainer>
       <ActionContainer>
-      {/* action menu */}
-      {/* likes nr */}
-      {/* description */}
-      {/* timestamp */}
-      {/* comments */}
-      {/* add a comment */}
+        <ActionMenu />
+        {/* likes nr */}
+        {/* description */}
+        {/* timestamp */}
+        {/* comments */}
+        {/* add a comment */}
       </ActionContainer>
     </PostContainer>
-  )
+  );
 }
 
 export default Post;
