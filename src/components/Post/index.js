@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import testPic from "assets/images/insta-pic1.jpg";
 import ActionMenu from "./components/ActionMenu";
 import PostHeader from "./components/PostHeader";
 
@@ -8,11 +7,11 @@ const PostContainer = styled.div`
   width: 400px;
   border: 1px solid lightgray;
   margin-bottom: 10px;
+  border-radius: 4px;
 `;
 
 const ImageContainer = styled.div`
   width: 100%;
-  min-height: 400px;
   max-height: 600px;
   border-bottom: 1px solid lightgray;
   display: flex;
@@ -25,21 +24,32 @@ const ImageContainer = styled.div`
   }
 `;
 
-const ActionContainer = styled.div`
-  height: 100px;
+const Description = styled.div`
+  display: flex;
+  > strong {
+    margin-right: 5px;
+  }
 `;
 
-function Post() {
+const ActionContainer = styled.div`
+  height: 100px;
+  padding: 4px 8px;
+`;
+
+function Post({ image, username, avatar, caption }) {
   return (
     <PostContainer>
-      <PostHeader />
+      <PostHeader username={username} avatar={avatar} />
       <ImageContainer>
-        <img src={testPic} alt="insta pic" />
+        <img src={image} alt="insta pic" />
       </ImageContainer>
       <ActionContainer>
         <ActionMenu />
         {/* likes nr */}
-        {/* description */}
+        <Description>
+          <strong>{username}</strong>
+          {caption}
+        </Description>
         {/* timestamp */}
         {/* comments */}
         {/* add a comment */}

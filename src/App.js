@@ -3,6 +3,9 @@ import styled from "styled-components";
 import instagramText from "./assets/images/insta-text.png";
 import Post from "./components/Post";
 
+import testPic from "assets/images/insta-pic1.jpg";
+import testPic2 from "assets/images/insta-pic2.png";
+
 const AppContainer = styled.main`
   display: flex;
   flex-direction: column;
@@ -30,10 +33,8 @@ function App() {
       <AppHeader>
         <img src={instagramText} alt="instagram text" />
       </AppHeader>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      <Post username="mihaiiftodi" image={testPic} caption="Statue picture" />
+      <Post username="alexandrucojo" image={testPic2} caption="sunset" />
     </AppContainer>
   );
 }

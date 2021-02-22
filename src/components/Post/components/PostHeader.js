@@ -13,11 +13,11 @@ const PostHeaderContainer = styled.div`
   }
 `;
 
-function PostHeader() {
+function PostHeader({ username, avatar }) {
   return (
     <PostHeaderContainer>
-      <Avatar alt="Mihai" src={""} />
-      <span>mihai</span>
+      <Avatar alt={username} src={avatar} />
+      <span>{username}</span>
     </PostHeaderContainer>
   );
 }
