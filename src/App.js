@@ -3,8 +3,6 @@ import styled from "styled-components";
 import instagramText from "./assets/images/insta-text.png";
 import Post from "./components/Post";
 
-import testPic from "assets/images/insta-pic1.jpg";
-import testPic2 from "assets/images/insta-pic2.png";
 import { db } from "utils/firebase";
 
 const AppContainer = styled.main`
