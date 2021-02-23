@@ -36,12 +36,12 @@ const ActionContainer = styled.div`
   padding: 4px 8px;
 `;
 
-function Post({ image, username, avatar, caption }) {
+function Post({ imageUrl, username, avatar, caption }) {
   return (
     <PostContainer>
       <PostHeader username={username} avatar={avatar} />
       <ImageContainer>
-        <img src={image} alt="insta pic" />
+        <img src={imageUrl} alt="insta pic" />
       </ImageContainer>
       <ActionContainer>
         <ActionMenu />
