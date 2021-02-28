@@ -5,7 +5,7 @@ import instagramText from "assets/images/insta-text.png";
 
 import { auth, db } from "utils/firebase";
 import styled from "styled-components";
-import { Button } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import { Link } from "react-router-dom";
 
 const AppContainer = styled.main`
@@ -45,6 +45,24 @@ const AppContent = styled.div`
   width: 100%;
 `;
 
+function DropdownMenu({ username }) {
+  const menu = (
+    <Menu>
+      <Menu.Item key="upload">Upload</Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="auth" onClick={() => auth.signOut()}>
+        <span>Sign out</span>
+      </Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <Dropdown overlay={menu} trigger={["click"]}>
+      <span>{username}</span>
+    </Dropdown>
+  );
+}
+
 function Home() {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
@@ -67,12 +85,10 @@ function Home() {
     <AppContainer>
       <AppHeader>
         <img src={instagramText} alt="instagram text" />
-        {user ? (
-          <Button onClick={() => auth.signOut()}>Log out</Button>
+        {user?.displayName ? (
+          <DropdownMenu username={user?.displayName} />
         ) : (
-          <Link to="/login">
-            <Button>Login</Button>
-          </Link>
+          <Link to="/login">Login</Link>
         )}
       </AppHeader>
       <AppContent>
