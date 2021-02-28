@@ -1,48 +1,24 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import instagramText from "./assets/images/insta-text.png";
-import Post from "./components/Post";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
-import { db } from "utils/firebase";
+import "antd/dist/antd.css";
 
-const AppContainer = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+import Home from "pages/Home";
+import Login from "pages/Login";
+import SignUp from "pages/SignUp";
 
-const AppHeader = styled.header`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 0;
-  border-bottom: 1px solid lightgray;
-  margin-bottom: 10px;
-
-  img {
-    height: 40px;
-    object-fit: contain;
-  }
-`;
+const history = createBrowserHistory();
 
 function App() {
-  const [posts, setPosts] = useState([]);
-  useEffect(() => {
-    db.collection("posts").onSnapshot((snapshot) =>
-      setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
-    );
-  }, []);
-
   return (
-    <AppContainer>
-      <AppHeader>
-        <img src={instagramText} alt="instagram text" />
-      </AppHeader>
-      {posts.map(({ id, ...post }) => (
-        <Post key={id} {...post} />
-      ))}
-    </AppContainer>
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={SignUp} />
+      </Switch>
+    </Router>
   );
 }
 

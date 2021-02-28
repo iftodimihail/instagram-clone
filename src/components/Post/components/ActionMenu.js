@@ -1,10 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  FavoriteIcon,
-  FavoriteBorder,
-  ModeCommentOutlined,
-} from "@material-ui/icons";
 
 const ActionMenuContainer = styled.div`
   display: flex;
@@ -21,12 +16,7 @@ const ActionMenuContainer = styled.div`
 `;
 
 function ActionMenu() {
-  return (
-    <ActionMenuContainer>
-      <FavoriteBorder />
-      <ModeCommentOutlined />
-    </ActionMenuContainer>
-  );
+  return <ActionMenuContainer></ActionMenuContainer>;
 }
 
 export default ActionMenu;
