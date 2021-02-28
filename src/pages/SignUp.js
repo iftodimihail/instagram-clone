@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { Input, Button } from "antd";
 
 import instagramText from "assets/images/insta-text.png";
 import { auth } from "utils/firebase";
 
-const SignUpContainer = styled.form`
+const SignUpContainer = styled.div`
   border: 1px solid lightgray;
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 24px;
   width: 300px;
 
@@ -101,6 +102,7 @@ function SignUp() {
         <Button type="primary" onClick={handleSubmit}>
           Sign up
         </Button>
+        <Link to="/login">Login</Link>
       </SignUpContainer>
     </CenteredWrap>
   );

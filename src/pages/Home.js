@@ -3,8 +3,10 @@ import Post from "components/Post";
 
 import instagramText from "assets/images/insta-text.png";
 
-import { db } from "utils/firebase";
+import { auth, db } from "utils/firebase";
 import styled from "styled-components";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
 
 const AppContainer = styled.main`
   display: flex;
@@ -42,6 +44,16 @@ const AppContent = styled.div`
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      setUser(authUser);
+    });
+
+    return () => unsubscribe();
+  }, [user]);
+
   useEffect(() => {
     db.collection("posts").onSnapshot((snapshot) =>
       setPosts(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
@@ -52,6 +64,13 @@ function Home() {
     <AppContainer>
       <AppHeader>
         <img src={instagramText} alt="instagram text" />
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Log out</Button>
+        ) : (
+          <Link to="/login">
+            <Button>Login</Button>
+          </Link>
+        )}
       </AppHeader>
       <AppContent>
         <PostsContainer>
