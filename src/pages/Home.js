@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Post from "components/Post";
+import Post from "components/common/Post";
 
 import instagramText from "assets/images/insta-text.png";
 
@@ -19,13 +19,16 @@ const AppHeader = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 12px 0;
+  justify-content: flex-end;
+  padding: 12px;
   border-bottom: 1px solid lightgray;
 
   img {
     height: 40px;
     object-fit: contain;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `;
 
