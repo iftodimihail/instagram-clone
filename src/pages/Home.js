@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
 import Post from "components/common/Post";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -90,7 +91,7 @@ function ImageUpload({ isOpened, setIsOpened, username }) {
   };
 
   const handleUpload = () => {
-    const uploadTask = storage.ref(`images/${file.name}`).put(file);
+    const uploadTask = storage.ref(`images/${file.name}_${nanoid()}`).put(file);
 
     uploadTask.on(
       "state_changed",
@@ -153,7 +154,7 @@ function ImageUpload({ isOpened, setIsOpened, username }) {
 
 function Home() {
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const [isOpenUpload, setIsOpenUpload] = useState(false);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 import { Input } from "antd";
 
@@ -10,9 +11,12 @@ function Login() {
   const [password, setPassword] = useState("");
   const [signupError, setSignupError] = useState("");
 
+  const history = useHistory();
+
   const handleLogin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
+      .then((user) => history.push("/"))
       .catch((error) => setSignupError(error.message));
   };
 

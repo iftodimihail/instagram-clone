@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import instagramText from "assets/images/insta-text.png";
 import { Button } from "antd";
-import { Link, useHistory } from "react-router-dom";
-import { auth } from "utils/firebase";
+import { Link } from "react-router-dom";
 
 const SignUpContainer = styled.div`
   border: 1px solid lightgray;
@@ -51,18 +50,6 @@ function AuthContainer({
   redirectLink,
   redirectLinkText,
 }) {
-  const history = useHistory();
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        history.push("/");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [history]);
-
   return (
     <CenteredWrap>
       <SignUpContainer>
