@@ -5,7 +5,6 @@ const ActionMenuContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 4px 16px;
 
   > svg {
     width: 26px;

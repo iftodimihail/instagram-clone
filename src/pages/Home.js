@@ -11,13 +11,17 @@ import instagramText from "assets/images/insta-text.png";
 import firebase, { auth, db, storage } from "utils/firebase";
 
 const AppContainer = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
 `;
 
 const AppHeader = styled.header`
+  position: sticky;
+  background-color: #fff;
+  z-index: 10;
+  top: 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -188,8 +192,8 @@ function Home() {
       </AppHeader>
       <AppContent>
         <PostsContainer>
-          {posts.map(({ id, ...post }) => (
-            <Post key={id} {...post} />
+          {posts.map((post) => (
+            <Post key={post.id} {...post} user={user} />
           ))}
         </PostsContainer>
       </AppContent>

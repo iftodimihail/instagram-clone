@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { db } from "utils/firebase";
 import ActionMenu from "./components/ActionMenu";
+import AddComment from "./components/AddComment";
+import CommentSection from "./components/CommentSection";
 import PostHeader from "./components/PostHeader";
 
 const PostContainer = styled.div`
@@ -25,35 +28,46 @@ const ImageContainer = styled.div`
 `;
 
 const Description = styled.div`
+  padding: 10px;
   display: flex;
+
   > strong {
     margin-right: 5px;
   }
 `;
 
-const ActionContainer = styled.div`
-  height: 100px;
-  padding: 4px 8px;
-`;
+function Post({ id, imageUrl, username, user, avatar, caption }) {
+  const [comments, setComments] = useState([]);
 
-function Post({ imageUrl, username, avatar, caption }) {
+  useEffect(() => {
+    const unsubscribe = db
+      .collection("posts")
+      .doc(id)
+      .collection("comments")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setComments(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
+      );
+
+    return () => unsubscribe();
+  }, [id]);
+
   return (
     <PostContainer>
       <PostHeader username={username} avatar={avatar} />
       <ImageContainer>
         <img src={imageUrl} alt="insta pic" />
       </ImageContainer>
-      <ActionContainer>
-        <ActionMenu />
-        {/* likes nr */}
-        <Description>
-          <strong>{username}</strong>
-          {caption}
-        </Description>
-        {/* timestamp */}
-        {/* comments */}
-        {/* add a comment */}
-      </ActionContainer>
+      <ActionMenu />
+      {/* likes nr */}
+      <Description>
+        <strong>{username}</strong>
+        {caption}
+      </Description>
+      {/* timestamp */}
+      {/* comments */}
+      <CommentSection comments={comments} />
+      <AddComment postId={id} user={user} />
     </PostContainer>
   );
 }
