@@ -58,7 +58,7 @@ function Post({ id, imageUrl, username, user, avatar, caption }) {
       <ImageContainer>
         <img src={imageUrl} alt="insta pic" />
       </ImageContainer>
-      <ActionMenu />
+      <ActionMenu postId={id} user={user} />
       {/* likes nr */}
       <Description>
         <strong>{username}</strong>
