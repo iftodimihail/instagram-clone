@@ -26,10 +26,12 @@ const CommentInput = styled(Input)`
   border-radius: 0;
   border-top: 1px solid lightgray;
   padding: 10px 50px 10px 10px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 
   :focus,
   :hover {
-    border-color: none;
+    border-color: lightgray;
     box-shadow: none;
   }
 `;
