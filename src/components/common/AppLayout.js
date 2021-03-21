@@ -24,7 +24,7 @@ const AppHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 12px;
+  padding: 20px;
   border-bottom: 1px solid lightgray;
 
   img {
@@ -56,6 +56,12 @@ const AppContentContainer = styled.div`
 function DropdownMenu({ username, openUploadModal }) {
   const menu = (
     <Menu>
+      <Menu.Item key="home">
+        <Link to="/">Home</Link>
+      </Menu.Item>
+      <Menu.Item key="profile">
+        <Link to="/profile">Profile</Link>
+      </Menu.Item>
       <Menu.Item key="upload" onClick={openUploadModal}>
         Upload
       </Menu.Item>

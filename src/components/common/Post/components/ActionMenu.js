@@ -45,7 +45,7 @@ const UserLikeContainer = styled.div`
 `;
 
 function ActionMenu({ postId, user }) {
-  const [likes, setLikes] = useState();
+  const [likes, setLikes] = useState([]);
   const [alreadyLiked, setAlreadyLiked] = useState();
   const [openedLikesModal, setOpenedLikesModal] = useState(false);
 
@@ -58,7 +58,7 @@ function ActionMenu({ postId, user }) {
     postLikesCollection.onSnapshot((snapshot) => {
       const docs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setLikes(docs);
-      setAlreadyLiked(docs.find((like) => like.username === user.displayName));
+      setAlreadyLiked(docs.find((like) => like.username === user?.displayName));
     });
   }, [user, postLikesCollection]);
 
@@ -78,7 +78,11 @@ function ActionMenu({ postId, user }) {
         {alreadyLiked ? <RedHeartFilled /> : <HeartOutlined />}
       </ActionButton>
       <ActionButton onClick={() => setOpenedLikesModal(true)} role="button">
-        {likes && <strong>{likes?.length} likes</strong>}
+        {likes && (
+          <strong>
+            {likes.length} {likes.length === 1 ? "like" : "likes"}
+          </strong>
+        )}
       </ActionButton>
       <Modal
         onCancel={() => setOpenedLikesModal(false)}
@@ -86,7 +90,7 @@ function ActionMenu({ postId, user }) {
         footer={null}
         visible={openedLikesModal}
       >
-        {([...likes, ...likes] || []).map(({ username }) => (
+        {likes.map(({ username }) => (
           <UserLikeContainer key={username}>
             <Avatar>{username[0].toUpperCase()}</Avatar>
             <strong>{username}</strong>
