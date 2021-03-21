@@ -13,6 +13,7 @@ const AppContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fafafa;
 `;
 
 const AppHeader = styled.header`

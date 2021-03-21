@@ -10,6 +10,7 @@ const PostContainer = styled.div`
   border: 1px solid lightgray;
   margin-bottom: 10px;
   border-radius: 4px;
+  background-color: #fff;
 `;
 
 const ImageContainer = styled.div`
