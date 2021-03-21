@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { db } from "utils/firebase";
 import ActionMenu from "./components/ActionMenu";
 import AddComment from "./components/AddComment";
 import CommentSection from "./components/CommentSection";
@@ -37,21 +36,6 @@ const Description = styled.div`
 `;
 
 function Post({ id, imageUrl, username, user, avatar, caption }) {
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    const unsubscribe = db
-      .collection("posts")
-      .doc(id)
-      .collection("comments")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) =>
-        setComments(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })))
-      );
-
-    return () => unsubscribe();
-  }, [id]);
-
   return (
     <PostContainer>
       <PostHeader username={username} avatar={avatar} />
@@ -65,7 +49,7 @@ function Post({ id, imageUrl, username, user, avatar, caption }) {
       </Description>
       {/* timestamp */}
       {/* comments */}
-      <CommentSection comments={comments} />
+      <CommentSection postId={id} />
       <AddComment postId={id} user={user} />
     </PostContainer>
   );
