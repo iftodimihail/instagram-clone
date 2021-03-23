@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 
 import { Input } from "antd";
 
-import { auth } from "utils/firebase";
+import { auth, db } from "utils/firebase";
 import AuthContainer from "components/common/AuthContainer";
 
 function SignUp() {
@@ -20,6 +20,11 @@ function SignUp() {
       .then(async ({ user }) => {
         await user.updateProfile({
           displayName: username,
+        });
+
+        await db.collection("users").doc(username).set({
+          username,
+          email: email,
         });
 
         history.push("/");

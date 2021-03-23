@@ -6,7 +6,7 @@ import { Menu, Dropdown } from "antd";
 
 import instagramText from "assets/images/insta-text.png";
 import { auth } from "utils/firebase";
-import UploadModal from "components/UploadModa";
+import UploadModal from "components/UploadModal";
 
 const AppContainer = styled.main`
   position: relative;
